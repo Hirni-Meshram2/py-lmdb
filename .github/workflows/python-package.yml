@@ -199,7 +199,7 @@ jobs:
                 /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";
               fi;
               uname -m;"
- 
+
     - name: Save wheel
       uses: actions/upload-artifact@v2
       with:
