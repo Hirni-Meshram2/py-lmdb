@@ -172,9 +172,11 @@ jobs:
               /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m venv .venv;
               yum install -y libffi-devel;
               yum install -y libdb-devel
+              .venv/bin/pip install --upgrade pip;
               .venv/bin/pip install wheel;
               .venv/bin/pip install cffi;
-              .venv/bin/pip install flake8 pytest patch-ng;
+              .venv/bin/pip install flake8 patch-ng;
+              .venv/bin/pip install pytest;
               /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python setup.py develop sdist bdist_wheel;
               ls dist;
               pytest;
