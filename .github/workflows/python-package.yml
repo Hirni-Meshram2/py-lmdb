@@ -171,7 +171,7 @@ jobs:
               bash -c "set -xe && \
               mkdir -p /github/home/.cache/pip && \
               chown -R $(whoami) /github/home/.cache && \
-              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m venv .venv && \
+              /opt/python/${{ matrix.PYTHON }}/bin/python -m venv .venv && \
               yum install -y libffi-devel && \
               if [[ ${{ matrix.impl }} == cpython ]] ; then
                 echo \"LMDB_FORCE_CPYTHON=1\"
@@ -192,12 +192,12 @@ jobs:
               .venv/bin/pip install wheel && \
               .venv/bin/pip install cffi && \
               .venv/bin/pip install flake8 patch-ng && \
-              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python setup.py develop sdist bdist_wheel && \
+              /opt/python/${{ matrix.PYTHON }}/bin/python setup.py develop sdist bdist_wheel && \
               ls dist && \
-              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m pip install pytest && \
-              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m pytest && \
+              /opt/python/${{ matrix.PYTHON }}/bin/python -m pip install pytest && \
+              /opt/python/${{ matrix.PYTHON }}/bin/python -m pytest && \
               if [[ matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' ]] ; then
-                /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";"
+                /opt/python/${{ matrix.PYTHON }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";"
               fi && \
       - run: sudo mv dist/lmdb-*.whl vers.txt
       - uses: actions/upload-artifact@v1
