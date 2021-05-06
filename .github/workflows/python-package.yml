@@ -198,7 +198,6 @@ jobs:
               if [[ matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' ]] ; then
                 /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";
               fi;"
-
     - name: Save wheel
       uses: actions/upload-artifact@v2
       with:
