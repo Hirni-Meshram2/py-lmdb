@@ -183,9 +183,9 @@ jobs:
                 sudo yum install -y libdb-devel
               fi;
               echo \"Linux: Envs are cpython=$LMDB_FORCE_CPYTHON
-            	  cffi=$LMDB_FORCE_CFFI pure=$LMDB_PURE system=$LMDB_FORCE_SYSTEM\";
+                cffi=$LMDB_FORCE_CFFI pure=$LMDB_PURE system=$LMDB_FORCE_SYSTEM\";
               echo \"Windows: Envs are cpython=$Env:LMDB_FORCE_CPYTHON
-            	  cffi=$Env:LMDB_FORCE_CFFI pure=$Env:LMDB_PURE system=$Env:LMDB_FORCE_SYSTEM\";
+                cffi=$Env:LMDB_FORCE_CFFI pure=$Env:LMDB_PURE system=$Env:LMDB_FORCE_SYSTEM\";
               .venv/bin/pip install wheel;
               .venv/bin/pip install cffi;
               .venv/bin/pip install flake8 pytest patch-ng;
