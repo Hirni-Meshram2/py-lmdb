@@ -179,7 +179,7 @@ jobs:
               /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python setup.py develop sdist bdist_wheel;
               ls dist;
               .venv/bin/pip install pytest;
-              pytest;
+              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m pytest;
               if [[ matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' ]] ; then
                 /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";
               fi;"
