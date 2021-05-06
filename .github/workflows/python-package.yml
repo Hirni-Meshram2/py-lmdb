@@ -172,7 +172,7 @@ jobs:
               /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m venv .venv;
               yum install -y libffi-devel;
               if: ${{ matrix.impl }} == cpython
-                echo \"LMDB_FORCE_CPYTHON=1\"
+              run: echo \"LMDB_FORCE_CPYTHON=1\"
               else
                 echo \"LMDB_FORCE_CFFI=1\"
               fi;
