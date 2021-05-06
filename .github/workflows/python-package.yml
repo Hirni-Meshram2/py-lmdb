@@ -151,7 +151,7 @@ jobs:
           name: manylinux
           
   test-aarch64:
-    name: "${{ matrix.PYTHON.VERSION }} manylinux2014-aarch64"
+    name: "${{ matrix.PYTHON }} manylinux2014-aarch64"
     runs-on: ubuntu-latest
     strategy:
        matrix:
@@ -196,7 +196,7 @@ jobs:
               ls dist && \
               /opt/python/${{ matrix.PYTHON }}/bin/python -m pip install pytest && \
               /opt/python/${{ matrix.PYTHON }}/bin/python -m pytest && \
-              if [[ matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' ]] ; then
+              if [[ matrix.PYTHON == 'cp39-cp39' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' ]] ; then
                 /opt/python/${{ matrix.PYTHON }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";"
               fi && \
       - run: sudo mv dist/lmdb-*.whl vers.txt
