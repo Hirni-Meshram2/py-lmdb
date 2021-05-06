@@ -171,30 +171,13 @@ jobs:
               chown -R $(whoami) /github/home/.cache;
               /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m venv .venv;
               yum install -y libffi-devel;
-              if [[ ${{ matrix.impl }} == cpython ]] \; then
-                echo "LMDB_FORCE_CPYTHON=1"
-              else
-                echo "LMDB_FORCE_CFFI=1"
-              fi;
-              if [[ ${{ matrix.purity }} == pure ]] \; then
-                echo \"LMDB_PURE=1\"\;
-              elif [[ ${{ matrix.purity }} == system ]] \; then
-                echo \"LMDB_FORCE_SYSTEM=1\"\;
-                sudo yum install -y libdb-devel\;
-              fi;
-              echo \"Linux: Envs are cpython=$LMDB_FORCE_CPYTHON
-                cffi=$LMDB_FORCE_CFFI pure=$LMDB_PURE system=$LMDB_FORCE_SYSTEM\";
-              echo \"Windows: Envs are cpython=$Env:LMDB_FORCE_CPYTHON
-                cffi=$Env:LMDB_FORCE_CFFI pure=$Env:LMDB_PURE system=$Env:LMDB_FORCE_SYSTEM\";
+              yum install -y libdb-devel
               .venv/bin/pip install wheel;
               .venv/bin/pip install cffi;
               .venv/bin/pip install flake8 pytest patch-ng;
               /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python setup.py develop sdist bdist_wheel;
               ls dist;
-              if [[ matrix.python-version != '3.4' && matrix.python-version != '3.6' && matrix.python-version != '3.8' ]] ; then
-                echo "Envs are cpython=$LMDB_FORCE_CPYTHON cffi=$LMDB_FORCE_CFFI pure=$LMDB_PURE system=$LMDB_FORCE_SYSTEM";
-                pytest;
-              fi;
+              pytest;
               if [[ matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' ]] ; then
                 /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";
               fi;"
