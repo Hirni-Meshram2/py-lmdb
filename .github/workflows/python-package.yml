@@ -171,11 +171,11 @@ jobs:
               chown -R $(whoami) /github/home/.cache;
               /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m venv .venv;
               yum install -y libffi-devel;
-              if ( '${{ matrix.impl }}' -eq 'cpython' ) {
-                echo \"LMDB_FORCE_CPYTHON=1\"
-              } else {
-                echo \"LMDB_FORCE_CFFI=1\"
-              }
+              if [[ ${{ matrix.impl }} == cpython ]] then
+                echo "LMDB_FORCE_CPYTHON=1"
+              else
+                echo "LMDB_FORCE_CFFI=1"
+              fi;
               if [[ ${{ matrix.purity }} == pure ]] \; then
                 echo \"LMDB_PURE=1\"\;
               elif [[ ${{ matrix.purity }} == system ]] \; then
