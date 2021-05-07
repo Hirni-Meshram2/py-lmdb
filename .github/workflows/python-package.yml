@@ -192,7 +192,7 @@ jobs:
               .venv/bin/pip install flake8 pytest patch-ng;
               /opt/python/${{ matrix.PYTHON }}/bin/python setup.py develop sdist bdist_wheel;
               ls dist;
-              if \[ ${{ matrix.PYTHON }} != \'3.4\' && ${{ matrix.PYTHON }} != \'3.6\' && ${{ matrix.PYTHON }} != \'3.8\' \] ; then
+              if \[ ${{ matrix.PYTHON }} != \'cp36-cp36\' && ${{ matrix.PYTHON }} != \'cp38-cp38\' \] ; then
                 echo \"Envs are cpython=$LMDB_FORCE_CPYTHON cffi=$LMDB_FORCE_CFFI pure=$LMDB_PURE system=$LMDB_FORCE_SYSTEM\";
                 pytest;
               fi;
