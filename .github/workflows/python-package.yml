@@ -198,7 +198,7 @@ jobs:
                 /opt/python/${{ matrix.PYTHON }}/bin/python -m pytest;
               fi;
               #if \[ ${{ matrix.PYTHON }} == \'cp39-cp39\' \] && \[ ${{ runner.os }} == 'Linux' \] && \[ ${{ matrix.purity }} == 'with-pylmdb-mods' \] && \[ ${{ matrix.impl }} == 'cpython' \] ; then
-              /opt/python/${{ matrix.PYTHON }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";"
+              /opt/python/${{ matrix.PYTHON }}/bin/python -c \"'import lmdb; print(lmdb.__version__, end="")' > vers.txt\";"
               #fi;"
       - run: sudo mv dist/lmdb-*.whl vers.txt
       - uses: actions/upload-artifact@v1
