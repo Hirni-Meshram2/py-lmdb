@@ -151,14 +151,14 @@ jobs:
           name: manylinux
           
   test-aarch64:
-    name: "${{ matrix.PYTHON }} manylinux2014-aarch64"
+    name: "${{ matrix.PYTHON.VERSION }} manylinux2014-aarch64"
     runs-on: ubuntu-latest
     strategy:
        matrix:
         impl: [cpython, cffi]
         purity: [pure, with-pylmdb-mods]
-        PYTHON:
-          - {VERSION: ["cp36-cp36m", "cp37-cp37m", "cp38-cp38m", "cp39-cp39m"]}
+        PYTHON: #["cp36-cp36m", "cp37-cp37m", "cp38-cp38m", "cp39-cp39m"]
+          - {VERSION: "cp36-cp36m", "cp37-cp37m", "cp38-cp38m", "cp39-cp39m"}
     steps:
       - uses: actions/checkout@v2
       - run: |
