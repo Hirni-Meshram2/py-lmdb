@@ -212,18 +212,18 @@ jobs:
         with:
           path: dist/lmdb*.tar.gz
           name: source        
-      - if: >-
+      - uses: RalfG/python-wheels-manylinux-build@v0.3.3
+        if: >-
           matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' &&
           matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython'
-        uses: RalfG/python-wheels-manylinux-build@v0.3.3
         with:
           python-versions: >-
               cp35-cp35m cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39
           build-requirements: 'patch-ng'
-      - if: >-
+      - uses: actions/upload-artifact@v2
+        if: >-
             matrix.python-version == '3.9' && runner.os == 'Linux' &&
             matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython'
-        uses: actions/upload-artifact@v2
         with:
           path: dist/lmdb*manylinux*.whl
           name: manylinux
