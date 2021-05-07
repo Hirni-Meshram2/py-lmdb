@@ -171,6 +171,7 @@ jobs:
               bash -c "set -xe && \
               mkdir -p /github/home/.cache/pip && \
               chown -R $(whoami) /github/home/.cache && \
+              python --version && \
               /opt/python/${{ matrix.PYTHON }}/bin/python -m venv .venv && \
               yum install -y libffi-devel && \
               if [[ ${{ matrix.impl }} == cpython ]] ; then
