@@ -151,14 +151,14 @@ jobs:
           name: manylinux
           
   test-aarch64:
-    name: "${{ matrix.PYTHON.VERSION }} manylinux2014-aarch64"
+    name: "${{ matrix.PYTHON }} manylinux2014-aarch64"
     runs-on: ubuntu-latest
     strategy:
        matrix:
         impl: [cpython, cffi]
         purity: [pure, with-pylmdb-mods]
-        PYTHON:
-          - {VERSION: "cp36-cp36m", "cp37-cp37m" , "cp38-cp38" , "cp39-cp39"}
+        PYTHON: ["cp36-cp36m", "cp37-cp37m" , "cp38-cp38" , "cp39-cp39"]
+          #- {VERSION: "cp36-cp36m", "cp37-cp37m" , "cp38-cp38" , "cp39-cp39"}
     steps:
       - uses: actions/checkout@v2
       - run: |
@@ -171,7 +171,8 @@ jobs:
               bash -c "set -xe;
               mkdir -p /github/home/.cache/pip;
               chown -R $(whoami) /github/home/.cache;
-              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m venv .venv;
+              python --version;
+              /opt/python/${{ matrix.PYTHON }}/bin/python -m venv .venv;
               yum install -y libffi-devel;
               .venv/bin/pip install -U pip wheel cffi six;
               if \[ ${{ matrix.impl }} == cpython \] ; then
@@ -189,14 +190,14 @@ jobs:
               echo \"Windows: Envs are cpython=$Env:LMDB_FORCE_CPYTHON
                 cffi=$Env:LMDB_FORCE_CFFI pure=$Env:LMDB_PURE system=$Env:LMDB_FORCE_SYSTEM\";
               .venv/bin/pip install flake8 pytest patch-ng;
-              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python setup.py develop sdist bdist_wheel;
+              /opt/python/${{ matrix.PYTHON }}/bin/python setup.py develop sdist bdist_wheel;
               ls dist;
-              if \[ matrix.python-version != \'3.4\' && matrix.python-version != \'3.6\' && matrix.python-version != \'3.8\' \] ; then
+              if \[ matrix.PYTHON != \'3.4\' && matrix.PYTHON != \'3.6\' && matrix.PYTHON != \'3.8\' \] ; then
                 echo \"Envs are cpython=$LMDB_FORCE_CPYTHON cffi=$LMDB_FORCE_CFFI pure=$LMDB_PURE system=$LMDB_FORCE_SYSTEM\";
                 pytest;
               fi;
-              if \[ matrix.pyver == \'cp39-cp39\' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' \] ; then
-                /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";
+              if \[ matrix.PYTHON.VERSION == \'cp39-cp39\' && runner.os == 'Linux' && matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython' \] ; then
+                /opt/python/${{ matrix.PYTHON }}/bin/python -c \"import lmdb; print(lmdb.__version__, end="")' > vers.txt\";
               fi;"
       - run: sudo mv dist/lmdb-*.whl vers.txt
       - uses: actions/upload-artifact@v1
