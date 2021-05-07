@@ -157,8 +157,8 @@ jobs:
        matrix:
         impl: [cpython, cffi]
         purity: [pure, with-pylmdb-mods]
-        PYTHON: ["cp36-cp36m", "cp37-cp37m", "cp38-cp38m", "cp39-cp39m"]
-          #- {VERSION: "cp37-cp37m"}
+        PYTHON:
+          - {VERSION: ["cp36-cp36m", "cp37-cp37m", "cp38-cp38m", "cp39-cp39m"]}
     steps:
       - uses: actions/checkout@v2
       - run: |
