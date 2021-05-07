@@ -172,7 +172,7 @@ jobs:
               mkdir -p /github/home/.cache/pip && \
               chown -R $(whoami) /github/home/.cache && \
               python --version && \
-              /opt/python/${{ matrix.PYTHON }}/bin/python -m venv .venv && \
+              /opt/python/${{ matrix.PYTHON.VERSION }}/bin/python -m venv .venv && \
               yum install -y libffi-devel && \
               if [[ ${{ matrix.impl }} == cpython ]] ; then
                 echo \"LMDB_FORCE_CPYTHON=1\"
