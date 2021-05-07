@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # Copyright 2013-2021 The py-lmdb authors, all rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -41,18 +40,14 @@ try:
     if _reading_docs() or os.getenv('LMDB_FORCE_CFFI') is not None:
         raise ImportError
     from lmdb.cpython import *
-    print ("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
     from lmdb.cpython import open
     from lmdb.cpython import __all__
-    print ("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 except ImportError:
     if (not _reading_docs()) and os.getenv('LMDB_FORCE_CPYTHON') is not None:
         raise
     from lmdb.cffi import *
-    print ("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     from lmdb.cffi import open
     from lmdb.cffi import __all__
     from lmdb.cffi import __doc__
-    print ("##########################################################")
 
 __version__ = '1.2.1'
