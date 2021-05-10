@@ -150,7 +150,7 @@ jobs:
           path: dist/lmdb*manylinux*.whl
           name: manylinux
           
-  test-aarch64:
+  test_build_aarch64:
     name: "${{ matrix.PYTHON }} aarch64 ${{ matrix.impl }} ${{ matrix.purity }}"
     runs-on: ubuntu-latest
     strategy:
@@ -190,7 +190,7 @@ jobs:
               echo \"Windows: Envs are cpython=$Env:LMDB_FORCE_CPYTHON
                 cffi=$Env:LMDB_FORCE_CFFI pure=$Env:LMDB_PURE system=$Env:LMDB_FORCE_SYSTEM\";
               .venv/bin/pip install flake8 pytest patch-ng;
-              /opt/python/${{ matrix.PYTHON }}/bin/python setup.py develop sdist bdist_wheel;
+              /opt/python/${{ matrix.PYTHON }}/bin/python setup.py develop bdist_wheel;
               ls dist;
               /opt/python/${{ matrix.PYTHON }}/bin/python -m pip install pytest;
               if \[ ${{ matrix.PYTHON }} != cp36-cp36 \] && \[ ${{ matrix.PYTHON }} != cp38-cp38 \] ; then
