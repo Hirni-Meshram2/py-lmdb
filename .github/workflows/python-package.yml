@@ -208,9 +208,10 @@ jobs:
       #- run: mkdir vers.txt
       #- run: sudo mv dist/lmdb-*.whl vers.txt
       - uses: actions/upload-artifact@v2
-        if: >-
-          matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' &&
-          matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython'
+        if: \[ ${{ matrix.PYTHON }} == cp39-cp39 \] && \[ ${{ runner.os }} == 'Linux' \] && \[ ${{ matrix.purity }} == 'with-pylmdb-mods' \] && \[ ${{ matrix.impl }} == 'cpython' \]
+        #>-
+         # matrix.pyver == 'cp39-cp39' && runner.os == 'Linux' &&
+          #matrix.purity == 'with-pylmdb-mods' && matrix.impl == 'cpython'
         with:
           path: vers.txt
           name: vers.txt     
