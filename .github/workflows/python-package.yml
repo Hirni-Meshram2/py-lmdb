@@ -221,7 +221,8 @@ jobs:
         if: \[ ${{ matrix.PYTHON }} == cp39-cp39 \] && \[ ${{ runner.os }} == 'Linux' \] && \[ ${{ matrix.purity }} == 'with-pylmdb-mods' \] && \[ ${{ matrix.impl }} == 'cpython' \]
         with:
           python-versions: >-
-              cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39
+              ${{ matrix.PYTHON }}
+              #cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39
           build-requirements: 'patch-ng'
       - uses: actions/upload-artifact@v2
         if: \[ ${{ matrix.PYTHON }} == cp39-cp39 \] && \[ ${{ runner.os }} == 'Linux' \] && \[ ${{ matrix.purity }} == 'with-pylmdb-mods' \] && \[ ${{ matrix.impl }} == 'cpython' \]
